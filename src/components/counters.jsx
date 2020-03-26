@@ -12,6 +12,22 @@ class Counters extends Component {
     ]
   };
 
+  handleIncrement = counter => {
+    const counters = [...this.state.counters]; // ... clones the array
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
+  };
+
+  handleReset = () => {
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
+
   handleDelete = counterId => {
     //Parent handles an event
     const counters = this.state.counters.filter(c => c.id !== counterId); //Creating a new array to delete counters
@@ -21,10 +37,17 @@ class Counters extends Component {
   render() {
     return (
       <div>
+        <button
+          onClick={this.handleReset}
+          className="btn btn-primary btn-sm-m2"
+        >
+          Reset
+        </button>
         {this.state.counters.map(counter => (
           <Counter
             key={counter.id}
             onDelete={this.handleDelete} //Event is handled as props
+            onIncrement={this.handleIncrement}
             counter={counter} //counter simplifies id and value
           /> //generating counters dinamically and asigning key values
         ))}
