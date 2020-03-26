@@ -18,8 +18,6 @@ class Counter extends Component {
     return (
       //Conditional rendering ex
       <div>
-        <h4>{this.props.id}</h4>
-        {this.props.children}
         <span className={this.getBatchClasses()}>{this.formatCount()}</span>
         <button
           onClick={() => this.handleIncrement({ id: 1 })} //passing parameters in a simpler and cleaner way
@@ -27,6 +25,12 @@ class Counter extends Component {
           className="btn btn-secondary btn-sm"
         >
           Increment
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.id)} //Raising an event from the parent component
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
         </button>
       </div> //can use React.Fragment instead of divs. ctrl + d to select
     );
