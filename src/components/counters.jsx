@@ -25,8 +25,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onDelete={this.handleDelete} //Event is handled as props
-            value={counter.value}
-            id={counter.id}
+            counter={counter} //counter simplifies id and value
           /> //generating counters dinamically and asigning key values
         ))}
       </div>
